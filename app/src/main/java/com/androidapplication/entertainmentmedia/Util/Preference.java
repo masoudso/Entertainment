@@ -24,7 +24,7 @@ public class Preference {
     }
 
     public String getSearch(){
-        return sharedPreferences.getString("search", "titanic");
+        return sharedPreferences.getString("search", "batman");
     }
 
 }

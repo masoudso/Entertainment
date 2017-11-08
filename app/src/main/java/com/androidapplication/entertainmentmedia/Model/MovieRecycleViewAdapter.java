@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ import java.util.List;
  * Created by ahmed on 11/7/2017.
  */
 
+@SuppressWarnings("ConstantConditions")
 public class MovieRecycleViewAdapter extends RecyclerView.Adapter<MovieRecycleViewAdapter.ViewHolder>{
 
     //Instance variables
@@ -53,7 +55,7 @@ public class MovieRecycleViewAdapter extends RecyclerView.Adapter<MovieRecycleVi
         Picasso.with(context)
                 .load(movies.getPoster())
                 .placeholder(android.R.drawable.ic_media_play)
-                .into((Target) holder.movieImage);
+                .into( holder.movieImage);
 
         holder.movieRelease.setText(movies.getYear());
 
@@ -67,7 +69,7 @@ public class MovieRecycleViewAdapter extends RecyclerView.Adapter<MovieRecycleVi
     public class ViewHolder extends RecyclerView.ViewHolder {
 
        private TextView movieTitle;
-       private  TextView movieImage;
+       private ImageView movieImage;
        private TextView movieRelease;
        private TextView movieCatagory;
 
@@ -76,7 +78,7 @@ public class MovieRecycleViewAdapter extends RecyclerView.Adapter<MovieRecycleVi
             context = ctx;
 
             movieTitle = (TextView) itemView.findViewById(R.id.movieTitleTextView);
-            movieImage = (TextView) itemView.findViewById(R.id.movieTitleTextView);
+            movieImage = (ImageView) itemView.findViewById(R.id.movieImageView);
             movieRelease = (TextView) itemView.findViewById(R.id.movieReleaseTextView);
             movieCatagory = (TextView) itemView.findViewById(R.id.movieCatagoryTextView);
 

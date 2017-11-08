@@ -67,7 +67,12 @@ public class MainActivity extends AppCompatActivity {
 
         Preference preference = new Preference(MainActivity.this);
         String search = preference.getSearch();
-        getMovies(search);
+        //getMovies(search);
+        moviesList = getMovies(search);
+
+        movieRecycleViewAdapter = new MovieRecycleViewAdapter(this, moviesList);
+        recyclerView.setAdapter(movieRecycleViewAdapter);
+        movieRecycleViewAdapter.notifyDataSetChanged();
     }
 
 
@@ -94,7 +99,11 @@ public class MainActivity extends AppCompatActivity {
                         movies.setPoster(moviesObj.getString("Poster"));
                         movies.setImdbId(moviesObj.getString("imdbID"));
 
-                        Log.d("Movies", movies.getTitle());
+                       // Log.d("Movies", movies.getTitle());
+
+                        moviesList.add(movies);
+
+
 
                     }
                 }
