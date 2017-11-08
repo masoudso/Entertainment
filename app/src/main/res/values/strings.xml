@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Entertainment Media</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="movie_title_name">Movie Title</string>
+    <string name="movie_release_name">Release</string>
+    <string name="movie_catagory_name">Catagory</string>
+
+</resources>
