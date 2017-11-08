@@ -17,7 +17,7 @@
             android:padding="12dp">
 
             <ImageView
-                android:id="@+id/movieImageView"
+                android:id="@+id/moviePosterImageView"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
                 android:background="@android:color/background_dark" />
@@ -28,13 +28,13 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="13dp"
-                android:layout_toEndOf="@+id/movieImageView"
+                android:layout_toEndOf="@+id/moviePosterImageView"
                 android:padding="5dp"
                 android:text="@string/movie_title_name"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/movieReleaseTextView"
+                android:id="@+id/movieYearTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/movieTitleTextView"
@@ -44,11 +44,11 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/movieCatagoryTextView"
+                android:id="@+id/movieTypeTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/movieReleaseTextView"
-                android:layout_below="@+id/movieReleaseTextView"
+                android:layout_alignEnd="@+id/movieYearTextView"
+                android:layout_below="@+id/movieYearTextView"
                 android:text="@string/movie_catagory_name"
                 android:textSize="14sp"
                 android:textStyle="bold" />

@@ -13,7 +13,6 @@ import android.widget.Toast;
 import com.androidapplication.entertainmentmedia.Data.Movies;
 import com.androidapplication.entertainmentmedia.R;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 
 
 import java.util.List;
@@ -49,15 +48,15 @@ public class MovieRecycleViewAdapter extends RecyclerView.Adapter<MovieRecycleVi
         Movies movies = moviesList.get(position);
 
         holder.movieTitle.setText(movies.getTitle());
-        holder.movieCatagory.setText(movies.getMovieType());
+        holder.movieType.setText(movies.getMovieType());
 
 
         Picasso.with(context)
                 .load(movies.getPoster())
                 .placeholder(android.R.drawable.ic_media_play)
-                .into( holder.movieImage);
+                .into( holder.moviePoster);
 
-        holder.movieRelease.setText(movies.getYear());
+        holder.movieYear.setText(movies.getYear());
 
     }
 
@@ -69,18 +68,18 @@ public class MovieRecycleViewAdapter extends RecyclerView.Adapter<MovieRecycleVi
     public class ViewHolder extends RecyclerView.ViewHolder {
 
        private TextView movieTitle;
-       private ImageView movieImage;
-       private TextView movieRelease;
-       private TextView movieCatagory;
+       private ImageView moviePoster;
+       private TextView movieYear;
+       private TextView movieType;
 
         public ViewHolder(View itemView, final Context ctx) {
             super(itemView);
             context = ctx;
 
             movieTitle = (TextView) itemView.findViewById(R.id.movieTitleTextView);
-            movieImage = (ImageView) itemView.findViewById(R.id.movieImageView);
-            movieRelease = (TextView) itemView.findViewById(R.id.movieReleaseTextView);
-            movieCatagory = (TextView) itemView.findViewById(R.id.movieCatagoryTextView);
+            moviePoster = (ImageView) itemView.findViewById(R.id.moviePosterImageView);
+            movieYear = (TextView) itemView.findViewById(R.id.movieYearTextView);
+            movieType = (TextView) itemView.findViewById(R.id.movieTypeTextView);
 
             itemView.setOnClickListener(new OnClickListener() {
                 @Override
