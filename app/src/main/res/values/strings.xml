@@ -2,7 +2,14 @@
     <string name="app_name">Entertainment Media</string>
     <string name="title_activity_main">Entertainment Media</string>
     <string name="movie_title_name">Movie Title</string>
-    <string name="movie_release_name">Release</string>
-    <string name="movie_catagory_name">Catagory</string>
+    <string name="movie_year_name">Release</string>
+    <string name="movie_type_name">Catagory</string>
+    <string name="movie_rating_name">Rating</string>
+    <string name="movie_director_name">Directed By</string>
+    <string name="movie_actors_name">Actors</string>
+    <string name="movie_writers_name" >Writers</string>
+    <string name="movie_plot_name">Plot</string>
+    <string name="movie_box_office_name">Box Office</string>
+    <string name="movie_runtime_name">Runtime</string>
 
 </resources>

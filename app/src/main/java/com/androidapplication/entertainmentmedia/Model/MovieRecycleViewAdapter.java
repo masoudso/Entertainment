@@ -1,6 +1,7 @@
 package com.androidapplication.entertainmentmedia.Model;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,9 +9,9 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.androidapplication.entertainmentmedia.Data.Movies;
+import com.androidapplication.entertainmentmedia.Controller.MovieDetailsActivity;
+import com.androidapplication.entertainmentmedia.Data.Movie;
 import com.androidapplication.entertainmentmedia.R;
 import com.squareup.picasso.Picasso;
 
@@ -26,11 +27,11 @@ public class MovieRecycleViewAdapter extends RecyclerView.Adapter<MovieRecycleVi
 
     //Instance variables
     private Context context;
-    private List<Movies> moviesList;
+    private List<Movie> movieList;
 
-    public MovieRecycleViewAdapter(Context context, List<Movies> movies) {
+    public MovieRecycleViewAdapter(Context context, List<Movie> movies) {
         this.context = context;
-        this.moviesList = movies;
+        this.movieList = movies;
     }
 
     @Override
@@ -45,24 +46,24 @@ public class MovieRecycleViewAdapter extends RecyclerView.Adapter<MovieRecycleVi
     @Override
     public void onBindViewHolder(MovieRecycleViewAdapter.ViewHolder holder, int position) {
 
-        Movies movies = moviesList.get(position);
+        Movie movie = movieList.get(position);
 
-        holder.movieTitle.setText(movies.getTitle());
-        holder.movieType.setText(movies.getMovieType());
+        holder.movieTitle.setText(movie.getTitle());
+        holder.movieType.setText(movie.getMovieType());
 
 
         Picasso.with(context)
-                .load(movies.getPoster())
+                .load(movie.getPoster())
                 .placeholder(android.R.drawable.ic_media_play)
                 .into( holder.moviePoster);
 
-        holder.movieYear.setText(movies.getYear());
+        holder.movieYear.setText(movie.getYear());
 
     }
 
     @Override
     public int getItemCount() {
-        return moviesList.size();
+        return movieList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -84,7 +85,12 @@ public class MovieRecycleViewAdapter extends RecyclerView.Adapter<MovieRecycleVi
             itemView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(context, "Row tapped", Toast.LENGTH_LONG).show();
+                    Movie movie = movieList.get(getAdapterPosition());
+
+                    Intent intent = new Intent(context, MovieDetailsActivity.class);
+
+                    intent.putExtra("movie", movie);
+                    ctx.startActivity(intent);
                 }
             });
         }

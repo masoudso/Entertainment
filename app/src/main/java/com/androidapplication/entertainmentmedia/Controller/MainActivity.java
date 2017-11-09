@@ -1,15 +1,14 @@
 package com.androidapplication.entertainmentmedia.Controller;
 
 
-import android.graphics.Movie;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.android.volley.Request;
@@ -18,11 +17,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.androidapplication.entertainmentmedia.Data.Movies;
+import com.androidapplication.entertainmentmedia.Data.Movie;
 import com.androidapplication.entertainmentmedia.Model.MovieRecycleViewAdapter;
 import com.androidapplication.entertainmentmedia.R;
-import com.androidapplication.entertainmentmedia.Util.Constants;
-import com.androidapplication.entertainmentmedia.Util.Preference;
+import com.androidapplication.entertainmentmedia.Utilities.Constants;
+import com.androidapplication.entertainmentmedia.Utilities.Preference;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,13 +29,12 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.RecursiveAction;
 
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private MovieRecycleViewAdapter movieRecycleViewAdapter;
-    private List<Movies> moviesList;
+    private List<Movie> movieList;
     private RequestQueue queue;
 
 
@@ -62,23 +60,23 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        moviesList = new ArrayList<>();
+        movieList = new ArrayList<>();
 
 
         Preference preference = new Preference(MainActivity.this);
         String search = preference.getSearch();
         //getMovies(search);
-        moviesList = getMovies(search);
+        movieList = getMovies(search);
 
-        movieRecycleViewAdapter = new MovieRecycleViewAdapter(this, moviesList);
+        movieRecycleViewAdapter = new MovieRecycleViewAdapter(this, movieList);
         recyclerView.setAdapter(movieRecycleViewAdapter);
         movieRecycleViewAdapter.notifyDataSetChanged();
     }
 
 
     //get movies
-    public List<Movies> getMovies(String searchTerm){
-        moviesList.clear();
+    public List<Movie> getMovies(String searchTerm){
+        movieList.clear();
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
                 Constants.URL_LEFT + searchTerm + Constants.URL_RIGHT, new Response.Listener<JSONObject>() {
@@ -92,25 +90,19 @@ public class MainActivity extends AppCompatActivity {
                     {
                         JSONObject moviesObj = moviesArray.getJSONObject(i);
 
-                        Movies movies = new Movies();
-                        movies.setTitle(moviesObj.getString("Title"));
-                        movies.setYear(moviesObj.getString("Year"));
-                        movies.setMovieType(moviesObj.getString("Type"));
-                        movies.setPoster(moviesObj.getString("Poster"));
-                        movies.setImdbId(moviesObj.getString("imdbID"));
+                        Movie movie = new Movie();
+                        movie.setTitle(moviesObj.getString("Title"));
+                        movie.setYear("Year Released: " + moviesObj.getString("Year"));
+                        movie.setMovieType("Type: " +moviesObj.getString("Type"));
+                        movie.setPoster( moviesObj.getString("Poster"));
+                        movie.setImdbId(moviesObj.getString("imdbID"));
 
-                       // Log.d("Movies", movies.getTitle());
-
-                        moviesList.add(movies);
-
-
-
+                        movieList.add(movie);
                     }
                 }
                 catch (JSONException e){
                     e.printStackTrace();
                 }
-
             }
         }, new Response.ErrorListener() {
             @Override
@@ -120,7 +112,18 @@ public class MainActivity extends AppCompatActivity {
     });
         queue.add(jsonObjectRequest);
 
-        return moviesList;
+        return movieList;
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }
 }

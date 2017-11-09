@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by ahmed on 11/7/2017.
  */
 
-public class Movies implements Serializable {
+public class Movie implements Serializable {
     private static final long id = 1L;
 
     private String title;
@@ -28,7 +28,7 @@ public class Movies implements Serializable {
     private String movieType;
 
     //An Empty Constructor
-    public Movies() {
+    public Movie() {
     }
 
     public static long getId() {

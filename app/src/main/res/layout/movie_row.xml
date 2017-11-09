@@ -31,6 +31,8 @@
                 android:layout_toEndOf="@+id/moviePosterImageView"
                 android:padding="5dp"
                 android:text="@string/movie_title_name"
+                android:textAlignment="viewStart"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -40,16 +42,19 @@
                 android:layout_alignStart="@+id/movieTitleTextView"
                 android:layout_below="@+id/movieTitleTextView"
                 android:padding="5dp"
-                android:text="@string/movie_release_name"
+                android:text="@string/movie_year_name"
+                android:textAlignment="viewStart"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/movieTypeTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/movieYearTextView"
+                android:layout_alignStart="@+id/movieYearTextView"
                 android:layout_below="@+id/movieYearTextView"
-                android:text="@string/movie_catagory_name"
+                android:padding="5dp"
+                android:text="@string/movie_type_name"
+                android:textAlignment="viewStart"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 

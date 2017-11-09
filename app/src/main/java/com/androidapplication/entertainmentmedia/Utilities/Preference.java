@@ -1,4 +1,4 @@
-package com.androidapplication.entertainmentmedia.Util;
+package com.androidapplication.entertainmentmedia.Utilities;
 
 import android.app.Activity;
 import android.content.Context;
