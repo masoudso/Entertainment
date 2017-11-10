@@ -11,5 +11,9 @@
     <string name="movie_plot_name">Plot</string>
     <string name="movie_box_office_name">Box Office</string>
     <string name="movie_runtime_name">Runtime</string>
+    <string name="search_title_name">Search</string>
+    <string name="search_text_name">New Search Term</string>
+    <string name="search_hint_name">e.g Harry Potter</string>
+    <string name="submit_text_name" >Submit</string>
 
 </resources>

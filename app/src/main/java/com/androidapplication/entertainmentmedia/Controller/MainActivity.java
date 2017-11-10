@@ -1,8 +1,10 @@
 package com.androidapplication.entertainmentmedia.Controller;
 
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +12,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -36,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
     private MovieRecycleViewAdapter movieRecycleViewAdapter;
     private List<Movie> movieList;
     private RequestQueue queue;
+    private AlertDialog.Builder alertDialogBuilder;
+    private AlertDialog dialog;
 
 
 
@@ -52,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                showInputDialog();
             }
         });
 
@@ -60,11 +66,11 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        movieList = new ArrayList<>();
-
-
         Preference preference = new Preference(MainActivity.this);
         String search = preference.getSearch();
+
+        movieList = new ArrayList<>();
+
         //getMovies(search);
         movieList = getMovies(search);
 
@@ -73,6 +79,54 @@ public class MainActivity extends AppCompatActivity {
         movieRecycleViewAdapter.notifyDataSetChanged();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //inflate the menu: this add items to the action bar if it present
+        //getMenuInflater().inflate(R.menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        //noinspection  SimplifiableIfStatement
+        if(id == R.id.new_search){
+            showInputDialog();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    public void showInputDialog(){
+        alertDialogBuilder = new AlertDialog.Builder(this);
+        View view = getLayoutInflater().inflate(R.layout.dialog_view, null);
+        final EditText newSearchEdit = (EditText) view.findViewById(R.id.searchEdit);
+        Button submitButton = (Button) view.findViewById(R.id.submitButton);
+
+        alertDialogBuilder.setView(view);
+        dialog = alertDialogBuilder.create();
+        dialog.show();
+
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Preference preference = new Preference(MainActivity.this);
+
+                if(!newSearchEdit.getText().toString().isEmpty()){
+
+                    String search = newSearchEdit.getText().toString();
+                    preference.setSearch(search);
+                    movieList.clear();
+
+                    getMovies(search);
+                }
+                dialog.dismiss();
+            }
+        });
+    }
 
     //get movies
     public List<Movie> getMovies(String searchTerm){
@@ -99,6 +153,8 @@ public class MainActivity extends AppCompatActivity {
 
                         movieList.add(movie);
                     }
+                    movieRecycleViewAdapter.notifyDataSetChanged();
+
                 }
                 catch (JSONException e){
                     e.printStackTrace();
@@ -109,21 +165,11 @@ public class MainActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
 
             }
-    });
+        });
         queue.add(jsonObjectRequest);
 
         return movieList;
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        
-        return true;
-    }
 
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    }
 }

@@ -20,6 +20,7 @@ import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+
 import org.json.JSONObject;
 
 
@@ -81,8 +82,8 @@ public class MovieDetailsActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 try{
-                    if(response.has("Ratings:")){
-                        JSONArray ratingJSONArray = response.getJSONArray("Ratings:");
+                    if(response.has("Ratings")){
+                        JSONArray ratingJSONArray = response.getJSONArray("Ratings");
 
                         String source = null;
                         String value = null;
@@ -103,7 +104,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
                         movieWriters.setText("Writer: " + response.getString("Writer"));
                         moviePlot.setText("Plot: " + response.getString("Plot"));
                         movieRuntime.setText("Runtime: " + response.getString("Runtime"));
-                        movieActors.setText("Actors: " + response.getString("Actors"));
+                       // movieActors.setText("Actors: " + response.getString("Actors"));
                         movieBoxOffice.setText("BoxOffice: " + response.getString("BoxOffice"));
 
                         Picasso.with(getApplicationContext())

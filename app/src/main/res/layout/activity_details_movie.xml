@@ -9,8 +9,8 @@
 
     <TextView
         android:id="@+id/movieWritersDetailsTextView"
-        android:layout_width="67dp"
-        android:layout_height="21dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="16dp"
         android:text="@string/movie_writers_name"
@@ -22,8 +22,8 @@
 
     <TextView
         android:id="@+id/movieActorsDetailsTextView"
-        android:layout_width="64dp"
-        android:layout_height="20dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="16dp"
         android:text="@string/movie_actors_name"
@@ -35,8 +35,8 @@
 
     <TextView
         android:id="@+id/movieBoxOfficeDetailsTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="12dp"
         android:text="@string/movie_box_office_name"
@@ -48,8 +48,8 @@
 
     <TextView
         android:id="@+id/moviePlotDetailsTextView"
-        android:layout_width="67dp"
-        android:layout_height="20dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="16dp"
         android:text="@string/movie_plot_name"
@@ -62,7 +62,7 @@
     <android.support.v7.widget.CardView
         android:id="@+id/cardView2"
         android:layout_width="0dp"
-        android:layout_height="134dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
