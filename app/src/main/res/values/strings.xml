@@ -18,5 +18,6 @@
     <string name="movie_cast">Cast</string>
     <string name="button_follow">+Follow This Media</string>
     <string name="button_rate">Rate</string>
+    <string name="button_unfollow">- Unfollow This Media</string>
 
 </resources>

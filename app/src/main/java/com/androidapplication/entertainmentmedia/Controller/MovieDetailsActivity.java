@@ -1,10 +1,17 @@
 package com.androidapplication.entertainmentmedia.Controller;
 
+import android.content.SharedPreferences;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -39,6 +46,9 @@ public class MovieDetailsActivity extends AppCompatActivity {
     private TextView movieBoxOffice;
     private TextView movieRuntime;
 
+    private ToggleButton buttonFollow;
+    private Button buttonRate;
+
     private RequestQueue queue;
     private String movieId;
 
@@ -55,6 +65,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
 
         setUpUserInterface();
+        setUpButtons();
         getMovieDetails(movieId);
 
     }
@@ -73,6 +84,42 @@ public class MovieDetailsActivity extends AppCompatActivity {
         movieBoxOffice = (TextView) findViewById(R.id.movieBoxOfficeDetailsTextView);
         movieRuntime = (TextView) findViewById(R.id.movieRunTimeDetailsTextView);
 
+    }
+
+    private void setUpButtons()
+    {
+        buttonFollow = (ToggleButton)findViewById(R.id.button_follow);
+        buttonRate = (Button)findViewById(R.id.button_rate);
+
+        SharedPreferences sharedPrefs = getSharedPreferences("com.androidapplication.entertainmentmedia", MODE_PRIVATE);
+
+        buttonFollow.setChecked(sharedPrefs.getBoolean(movie.getTitle(), false));
+        buttonFollow.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+            {
+                if (isChecked)
+                {
+                    Toast.makeText(getBaseContext(), ("You are now following " + movie.getTitle() + "!"), Toast.LENGTH_SHORT).show();
+
+                    SharedPreferences.Editor prefEditor = getSharedPreferences("com.androidapplication.entertainmentmedia", MODE_PRIVATE).edit();
+                    prefEditor.putBoolean(movie.getTitle(), true);
+                    prefEditor.commit();
+                }
+                else
+                {
+                    Toast.makeText(getBaseContext(), ("You are no longer following " + movie.getTitle() + "!"), Toast.LENGTH_SHORT).show();
+
+                    SharedPreferences.Editor prefEditor = getSharedPreferences("com.androidapplication.entertainmentmedia", MODE_PRIVATE).edit();
+                    prefEditor.putBoolean(movie.getTitle(), false);
+                    prefEditor.commit();
+                }
+            }
+        });
+    }
+
+    public void followButton(View view)
+    {
     }
 
     private void getMovieDetails(String movieId) {
