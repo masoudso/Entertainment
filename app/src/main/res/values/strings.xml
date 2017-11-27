@@ -19,5 +19,6 @@
     <string name="button_follow">+Follow This Media</string>
     <string name="button_rate">Rate</string>
     <string name="button_unfollow">- Unfollow This Media</string>
+    <string name="rating_message">Leave a rating for this media:</string>
 
 </resources>
