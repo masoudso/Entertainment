@@ -15,5 +15,10 @@
     <string name="search_text_name">Search a show</string>
     <string name="search_hint_name">e.g Harry Potter</string>
     <string name="submit_text_name" >Submit</string>
+    <string name="movie_cast">Cast</string>
+    <string name="button_follow">+Follow This Media</string>
+    <string name="button_rate">Rate</string>
+    <string name="button_unfollow">- Unfollow This Media</string>
+    <string name="rating_message">Leave a rating for this media:</string>
 
 </resources>
