@@ -1,19 +1,36 @@
 <resources>
-    <string name="app_name">TV </string>
-    <string name="title_activity_main">Show Tracker</string>
+    <string name="app_name">Media Tracker </string>
+    <string name="title_activity_main">Media Tracker</string>
     <string name="movie_title_name">Movie Title</string>
     <string name="movie_year_name">Release</string>
     <string name="movie_type_name">Catagory</string>
     <string name="movie_rating_name">Rating</string>
     <string name="movie_director_name">Directed By</string>
     <string name="movie_actors_name">Actors</string>
-    <string name="movie_writers_name" >Writers</string>
+    <string name="movie_writers_name">Writers</string>
     <string name="movie_plot_name">Plot</string>
     <string name="movie_box_office_name">Box Office</string>
     <string name="movie_runtime_name">Runtime</string>
     <string name="search_title_name">Search</string>
     <string name="search_text_name">Search a show</string>
     <string name="search_hint_name">e.g Harry Potter</string>
-    <string name="submit_text_name" >Submit</string>
+    <string name="submit_text_name">Submit</string>
+    <string name="movie_cast">Cast</string>
+    <string name="button_follow">+Follow This Media</string>
+    <string name="button_rate">Rate</string>
+    <string name="button_unfollow">- Unfollow This Media</string>
+    <string name="rating_message">Leave a rating for this media:</string>
+    <string name="button_login">Login</string>
+    <string name="title_activity_main_login">MainLogin</string>
+    <string name="button_register">Don\'t have an account? Tap here.</string>
+    <string name="title_activity_main_register">MainRegister</string>
+    <string name="register_title">User Registration</string>
+    <string name="register_Username">Enter Username</string>
+    <string name="register_username">Enter Username</string>
+    <string name="register_password">Enter Password</string>
+    <string name="button_register_account">Register</string>
+    <string name="register_has_account">I already have an account. Login.</string>
+    <string name="login_title">User Login</string>
+    <string name="register_email">Enter Email Address</string>
 
 </resources>

@@ -16,7 +16,7 @@
         android:text="@string/movie_writers_name"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.112"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/movieActorsDetailsTextView" />
 
@@ -29,9 +29,9 @@
         android:text="@string/movie_actors_name"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.113"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+        app:layout_constraintTop_toBottomOf="@+id/moviedirectorDetailsTextView" />
 
     <TextView
         android:id="@+id/movieBoxOfficeDetailsTextView"
@@ -42,9 +42,9 @@
         android:text="@string/movie_box_office_name"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.116"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/moviePlotDetailsTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/movieWritersDetailsTextView" />
 
     <TextView
         android:id="@+id/moviePlotDetailsTextView"
@@ -55,22 +55,19 @@
         android:text="@string/movie_plot_name"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.115"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/movieWritersDetailsTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/cardView2" />
 
     <android.support.v7.widget.CardView
         android:id="@+id/cardView2"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_height="89dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.02">
+        app:layout_constraintTop_toBottomOf="@+id/movieTitleDetailsTextView">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -87,23 +84,12 @@
                 tools:layout_editor_absoluteY="8dp" />
 
             <TextView
-                android:id="@+id/movieTitleDetailsTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="15dp"
-                android:layout_toEndOf="@+id/moviePosterDetailsImageVeiw"
-                android:text="@string/movie_title_name"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-            <TextView
                 android:id="@+id/movieYearDetailsTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/movieTitleDetailsTextView"
-                android:layout_below="@+id/movieTitleDetailsTextView"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="14dp"
+                android:layout_toEndOf="@+id/moviePosterDetailsImageVeiw"
                 android:text="@string/movie_year_name"
                 android:textStyle="bold" />
 
@@ -126,15 +112,6 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/moviedirectorDetailsTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/movieRunTimeDetailsTextView"
-                android:text="@string/movie_director_name"
-                android:textStyle="bold" />
-
-            <TextView
                 android:id="@+id/movieRunTimeDetailsTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -145,5 +122,72 @@
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>
+
+    <TextView
+        android:id="@+id/movieTitleDetailsTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@+id/moviePosterDetailsImageVeiw"
+        android:text="@string/movie_title_name"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/moviedirectorDetailsTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/movieRunTimeDetailsTextView"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/movie_director_name"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/movieCast" />
+
+    <Button
+        android:id="@+id/button_rate"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/button_rate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/button_follow"
+        app:layout_constraintTop_toBottomOf="@+id/moviePlotDetailsTextView" />
+
+    <TextView
+        android:id="@+id/movieCast"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/movie_cast"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_follow" />
+
+    <ToggleButton
+        android:id="@+id/button_follow"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_marginTop="16dp"
+        android:checked="false"
+        android:text="@string/button_follow"
+        android:textOff="@string/button_follow"
+        android:textOn="@string/button_unfollow"
+        app:layout_constraintEnd_toStartOf="@+id/button_rate"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/moviePlotDetailsTextView" />
 
 </android.support.constraint.ConstraintLayout>
