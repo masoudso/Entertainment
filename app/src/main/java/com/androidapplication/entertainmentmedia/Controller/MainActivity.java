@@ -1,8 +1,7 @@
 package com.androidapplication.entertainmentmedia.Controller;
 
 
-import android.content.SharedPreferences;
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
@@ -15,8 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -36,7 +33,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.io.Serializable;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,60 +43,6 @@ public class MainActivity extends AppCompatActivity {
     private AlertDialog.Builder alertDialogBuilder;
     private AlertDialog dialog;
 
-    /* started here by Masoud */
-
-    //Button b2;
-    //EditText ed1,ed2;
-
-    //TextView tx1;
-    int counter = 3;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        final TextView tx1 = (TextView)findViewById(R.id.newText);
-        final Button b1 = (Button)findViewById(R.id.button);
-        final EditText ed1 = (EditText)findViewById(R.id.enterName);
-        final EditText ed2 = (EditText)findViewById(R.id.password);
-        final Button b2 = (Button)findViewById(R.id.buttonA);
-
-        tx1.setVisibility(View.GONE);
-
-        b1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(ed1.getText().toString().equals("admin") &&
-                        ed2.getText().toString().equals("admin")) {
-                    Toast.makeText(getApplicationContext(),
-                            "Redirecting...",Toast.LENGTH_LONG).show();
-                }else{
-                    Toast.makeText(getApplicationContext(), "Wrong Credentials", Toast.LENGTH_LONG).show();
-
-                            tx1.setVisibility(View.VISIBLE);
-                    tx1.setBackgroundColor(Color.RED);
-                    counter--;
-                    tx1.setText(Integer.toString(counter));
-
-                    if (counter == 0) {
-                        b1.setEnabled(false);
-                    }
-                }
-            }
-        });
-
-        b2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-    }
-
-    /* ended here */
-
-/*
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -135,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(movieRecycleViewAdapter);
         movieRecycleViewAdapter.notifyDataSetChanged();
     }
-*/
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         //inflate the menu: this add items to the action bar if it present
@@ -153,6 +95,13 @@ public class MainActivity extends AppCompatActivity {
         if(id == R.id.new_search){
             showInputDialog();
         }
+
+        if (id == R.id.button_login)
+        {
+            Intent intent = new Intent(MainActivity.this, MainLogin.class);
+            MainActivity.this.startActivity(intent);
+        }
+
         return super.onOptionsItemSelected(item);
     }
 

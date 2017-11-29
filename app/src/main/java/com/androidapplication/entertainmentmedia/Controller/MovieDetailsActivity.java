@@ -152,10 +152,6 @@ public class MovieDetailsActivity extends AppCompatActivity {
         });
     }
 
-    public void followButton(View view)
-    {
-    }
-
     private void getMovieDetails(String movieId) {
         /**********************MAY HAVE TO EDIT THE CODE ***********************/
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,

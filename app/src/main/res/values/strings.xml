@@ -7,18 +7,20 @@
     <string name="movie_rating_name">Rating</string>
     <string name="movie_director_name">Directed By</string>
     <string name="movie_actors_name">Actors</string>
-    <string name="movie_writers_name" >Writers</string>
+    <string name="movie_writers_name">Writers</string>
     <string name="movie_plot_name">Plot</string>
     <string name="movie_box_office_name">Box Office</string>
     <string name="movie_runtime_name">Runtime</string>
     <string name="search_title_name">Search</string>
     <string name="search_text_name">Search a show</string>
     <string name="search_hint_name">e.g Harry Potter</string>
-    <string name="submit_text_name" >Submit</string>
+    <string name="submit_text_name">Submit</string>
     <string name="movie_cast">Cast</string>
     <string name="button_follow">+Follow This Media</string>
     <string name="button_rate">Rate</string>
     <string name="button_unfollow">- Unfollow This Media</string>
     <string name="rating_message">Leave a rating for this media:</string>
+    <string name="button_login">Login</string>
+    <string name="title_activity_main_login">MainLogin</string>
 
 </resources>

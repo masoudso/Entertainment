@@ -23,7 +23,11 @@
         </activity>
         <activity
             android:name=".Controller.MovieDetailsActivity"
-            android:parentActivityName=".Controller.MainActivity"></activity>
+            android:parentActivityName=".Controller.MainActivity" />
+        <activity
+            android:name=".Controller.MainLogin"
+            android:label="@string/title_activity_main_login"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
