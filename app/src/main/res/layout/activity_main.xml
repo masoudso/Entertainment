@@ -94,17 +94,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="24dp"
         android:layout_toStartOf="@+id/login"
+        android:layout_toLeftOf="@+id/login"
         android:text="login" />
 
     <Button
         android:id="@+id/buttonA"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button"
-        android:layout_alignBottom="@+id/button"
-        android:layout_alignStart="@+id/newText"
+        android:layout_toRightOf="@+id/login"
+        android:layout_toEndOf="@+id/login"
+        android:layout_alignParentBottom="true"
         android:text="Cancel" />
 
     <!-- Masoud ended here -->
