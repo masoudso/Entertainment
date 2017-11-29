@@ -29,8 +29,8 @@ public class MainLogin extends AppCompatActivity {
         final EditText ed2 = (EditText)findViewById(R.id.password);
         final Button b2 = (Button)findViewById(R.id.buttonA);
 
-        counter = 0;
-        tx1.setVisibility(View.GONE);
+        counter = 3;
+        tx1.setText(Integer.toString(counter));
 
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
