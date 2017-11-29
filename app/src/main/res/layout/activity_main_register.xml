@@ -31,7 +31,8 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/registerTitle"
+        android:textColorHint="@color/colorPrimaryDark"/>
 
     <EditText
         android:id="@+id/registerPassword"
@@ -43,7 +44,8 @@
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerUsername" />
+        app:layout_constraintTop_toBottomOf="@+id/registerUsername"
+        android:textColorHint="@color/colorPrimaryDark"/>
 
     <Button
         android:id="@+id/buttonRegisterAccount"
