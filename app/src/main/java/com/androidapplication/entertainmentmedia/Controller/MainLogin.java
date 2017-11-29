@@ -1,5 +1,6 @@
 package com.androidapplication.entertainmentmedia.Controller;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -27,7 +28,7 @@ public class MainLogin extends AppCompatActivity {
         final Button b1 = (Button)findViewById(R.id.button);
         final EditText ed1 = (EditText)findViewById(R.id.enterName);
         final EditText ed2 = (EditText)findViewById(R.id.password);
-        final Button b2 = (Button)findViewById(R.id.buttonA);
+        final Button registerButton = (Button)findViewById(R.id.button_register);
 
         counter = 3;
         tx1.setText(Integer.toString(counter));
@@ -54,10 +55,11 @@ public class MainLogin extends AppCompatActivity {
             }
         });
 
-        b2.setOnClickListener(new View.OnClickListener() {
+        registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                finish();
+            public void onClick(View view) {
+                Intent intent = new Intent(MainLogin.this, MainRegister.class);
+                MainLogin.this.startActivity(intent);
             }
         });
     }
