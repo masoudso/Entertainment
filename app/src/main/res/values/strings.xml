@@ -31,5 +31,6 @@
     <string name="button_register_account">Register</string>
     <string name="register_has_account">I already have an account. Login.</string>
     <string name="login_title">User Login</string>
+    <string name="register_email">Enter Email Address</string>
 
 </resources>
