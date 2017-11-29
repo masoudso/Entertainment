@@ -15,18 +15,19 @@
             android:name=".Controller.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".Controller.MovieDetailsActivity"
             android:parentActivityName=".Controller.MainActivity" />
         <activity
             android:name=".Controller.MainLogin"
-            android:parentActivityName=".Controller.MainActivity"/>
+            android:parentActivityName=".Controller.MainActivity">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+
+        </intent-filter>
+        </activity>
         <activity
             android:name=".Controller.MainRegister"
             android:parentActivityName=".Controller.MainActivity"/>
