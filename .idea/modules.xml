@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/EntertainmentMasoud.iml" filepath="$PROJECT_DIR$/EntertainmentMasoud.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/EntertainmentFinal.iml" filepath="$PROJECT_DIR$/.idea/EntertainmentFinal.iml" />
+      <module fileurl="file://C:\Users\Zachary\StudioProjects\EntertainmentFinal\EntertainmentMasoud.iml" filepath="C:\Users\Zachary\StudioProjects\EntertainmentFinal\EntertainmentMasoud.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\Zachary\StudioProjects\EntertainmentFinal\app\app.iml" filepath="C:\Users\Zachary\StudioProjects\EntertainmentFinal\app\app.iml" />
     </modules>
   </component>
 </project>
