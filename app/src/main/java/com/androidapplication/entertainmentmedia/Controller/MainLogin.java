@@ -65,6 +65,7 @@ public class MainLogin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 loginUser(viewUsername.getText().toString(), viewPassword.getText().toString());
+                finish();
             }
         });
 
