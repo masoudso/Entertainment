@@ -24,6 +24,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.androidapplication.entertainmentmedia.Data.Movie;
 import com.androidapplication.entertainmentmedia.R;
+import com.androidapplication.entertainmentmedia.Utilities.API;
 import com.androidapplication.entertainmentmedia.Utilities.Constants;
 import com.squareup.picasso.Picasso;
 
@@ -58,6 +59,8 @@ public class MovieDetailsActivity extends AppCompatActivity {
     private AlertDialog dialog;
     private SharedPreferences.Editor prefEditor;
 
+    private API api;
+
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +72,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         movie = (Movie) getIntent().getSerializableExtra("movie");
         movieId = movie.getImdbId();
 
-
+        getAPI();
         setUpUserInterface();
         setUpButtons();
         getMovieDetails(movieId);
@@ -202,6 +205,11 @@ public class MovieDetailsActivity extends AppCompatActivity {
         });
 
         queue.add(jsonObjectRequest);
+    }
+
+    private void getAPI()
+    {
+        api = (API) getIntent().getSerializableExtra("API");
     }
 }
 

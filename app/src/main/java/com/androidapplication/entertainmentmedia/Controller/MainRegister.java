@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.androidapplication.entertainmentmedia.R;
+import com.androidapplication.entertainmentmedia.Utilities.API;
 
 public class MainRegister extends AppCompatActivity {
 
@@ -23,11 +24,14 @@ public class MainRegister extends AppCompatActivity {
     private EditText viewEmail;
     private EditText viewPassword;
 
+    private API api;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_register);
 
+        getAPI();
         setUpInterface();
         setUpButtons();
     }
@@ -82,6 +86,11 @@ public class MainRegister extends AppCompatActivity {
     private regResult createUser(String username, String email, String password)
     {
         return regResult.SUCCESS;
+    }
+
+    private void getAPI()
+    {
+        api = (API) getIntent().getSerializableExtra("API");
     }
 
 }

@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.androidapplication.entertainmentmedia.R;
+import com.androidapplication.entertainmentmedia.Utilities.API;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,6 +27,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
@@ -42,11 +44,14 @@ public class MainLogin extends AppCompatActivity {
     private EditText viewPassword;
     private Button registerButton;
 
+    private API api;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_login);
 
+        getAPI();
         setUpInterface();
     }
 
@@ -65,6 +70,10 @@ public class MainLogin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 loginUser(viewUsername.getText().toString(), viewPassword.getText().toString());
+
+                Intent intent = new Intent();
+                intent.putExtra("API", api);
+                setResult(RESULT_OK, intent);
                 finish();
             }
         });
@@ -164,6 +173,11 @@ public class MainLogin extends AppCompatActivity {
         {
 
         }
+    }
+
+    private void getAPI()
+    {
+        this.api = (API) getIntent().getSerializableExtra("API");
     }
 
 }

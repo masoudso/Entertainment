@@ -24,6 +24,7 @@ import com.android.volley.toolbox.Volley;
 import com.androidapplication.entertainmentmedia.Data.Movie;
 import com.androidapplication.entertainmentmedia.Model.MovieRecycleViewAdapter;
 import com.androidapplication.entertainmentmedia.R;
+import com.androidapplication.entertainmentmedia.Utilities.API;
 import com.androidapplication.entertainmentmedia.Utilities.Constants;
 import com.androidapplication.entertainmentmedia.Utilities.Preference;
 
@@ -42,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
     private RequestQueue queue;
     private AlertDialog.Builder alertDialogBuilder;
     private AlertDialog dialog;
+
+    private API api;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +102,8 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.button_login)
         {
             Intent intent = new Intent(MainActivity.this, MainLogin.class);
-            MainActivity.this.startActivity(intent);
+            intent.putExtra("API", api);
+            MainActivity.this.startActivityForResult(intent, 1);
         }
 
         return super.onOptionsItemSelected(item);
@@ -175,6 +179,15 @@ public class MainActivity extends AppCompatActivity {
         queue.add(jsonObjectRequest);
 
         return movieList;
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK) {
+                api = (API) data.getSerializableExtra("API");
+            }
+        }
     }
 
 
