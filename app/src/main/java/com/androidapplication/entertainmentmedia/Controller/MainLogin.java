@@ -100,7 +100,6 @@ public class MainLogin extends AppCompatActivity {
 
     private class authTask extends AsyncTask<String, Void, Void> {
 
-        JSONObject responseData;
         Map<String, String> postData;
 
         public authTask(String username, String password) {

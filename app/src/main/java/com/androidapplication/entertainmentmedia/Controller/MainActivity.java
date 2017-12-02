@@ -2,6 +2,7 @@ package com.androidapplication.entertainmentmedia.Controller;
 
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
@@ -9,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,7 +35,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -76,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         movieList = new ArrayList<>();
 
         //getMovies(search);
-        movieList = getMovies(search);
+        getMovies(search);
 
         movieRecycleViewAdapter = new MovieRecycleViewAdapter(this, movieList);
         recyclerView.setAdapter(movieRecycleViewAdapter);
@@ -112,7 +116,8 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.button_login)
         {
             if (api.getLoginStatus()) {
-                api.logout();
+                logoutTask task = new logoutTask();
+                task.execute();
             }
             else{
                 Intent intent = new Intent(MainActivity.this, MainLogin.class);
@@ -155,46 +160,40 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //get movies
-    public List<Movie> getMovies(String searchTerm){
+    public void getMovies(String searchTerm){
         movieList.clear();
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
-                Constants.URL_LEFT + searchTerm + Constants.URL_RIGHT, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
+        searchTask task = new searchTask(searchTerm);
+        task.execute();
+    }
 
-                try{
-                    JSONArray moviesArray = response.getJSONArray("Search");
+    public void parseMovie(JSONObject searchObject)
+    {
+        if (searchObject == null)
+            return;
 
-                    for(int i = 0; i < moviesArray.length(); i++)
-                    {
-                        JSONObject moviesObj = moviesArray.getJSONObject(i);
+        JSONArray movies;
 
-                        Movie movie = new Movie();
-                        movie.setTitle(moviesObj.getString("Title"));
-                        movie.setYear("Year Released: " + moviesObj.getString("Year"));
-                        movie.setMovieType("Type: " +moviesObj.getString("Type"));
-                        movie.setPoster( moviesObj.getString("Poster"));
-                        movie.setImdbId(moviesObj.getString("imdbID"));
+        try {
+            movies = searchObject.getJSONObject("data").getJSONObject("search").getJSONArray("movies");
 
-                        movieList.add(movie);
-                    }
-                    movieRecycleViewAdapter.notifyDataSetChanged();
+            for (int i = 0; i < movies.length(); i++) {
+                Movie movie = new Movie();
+                JSONObject movieObject = movies.getJSONObject(i);
 
-                }
-                catch (JSONException e){
-                    e.printStackTrace();
-                }
+                movie.setTitle(movieObject.getString("title"));
+                movie.setYear(movieObject.getString("air_date_time"));
+                movie.setPlot(movieObject.getString("description"));
+                movie.setPoster(movieObject.getString("pic_url"));
+
+                movieList.add(movie);
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+            movieRecycleViewAdapter.notifyDataSetChanged();
 
-            }
-        });
-        queue.add(jsonObjectRequest);
-
-        return movieList;
+        } catch (JSONException e) {
+                e.printStackTrace();
+                return;
+        }
     }
 
     //Receive API from finished login activity
@@ -208,5 +207,38 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private class logoutTask extends AsyncTask<String, Void, Void> {
 
+        @Override
+        protected Void doInBackground(String... strings) {
+            api.logout();
+            return null;
+        }
+
+        protected void onPostExecute(Void doInBackground)
+        {
+            invalidateOptionsMenu();
+        }
+    }
+
+    private class searchTask extends AsyncTask<String, Void, Void> {
+
+        private String query;
+        private JSONObject movieObject;
+
+        private searchTask(String query) {
+            this.query = query;
+        }
+
+        @Override
+        protected Void doInBackground(String... strings) {
+            movieObject = api.search(query);
+            return null;
+        }
+
+        protected void onPostExecute(Void doInBackground)
+        {
+            parseMovie(movieObject);
+        }
+    }
 }
