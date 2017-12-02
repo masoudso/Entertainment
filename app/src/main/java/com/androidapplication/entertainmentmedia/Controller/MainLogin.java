@@ -118,10 +118,15 @@ public class MainLogin extends AppCompatActivity {
         {
             if (api.getLoginStatus()) {
                 //Login successful, return the API to mainActivity
+                Toast.makeText(getBaseContext(), "Login Successful!", Toast.LENGTH_SHORT).show();
                 Intent retIntent = new Intent();
                 retIntent.putExtra("API", api);
                 setResult(RESULT_OK, retIntent);
                 finish();
+            }
+            else
+            {
+                Toast.makeText(getBaseContext(), "Login Failed.", Toast.LENGTH_SHORT).show();
             }
         }
     }

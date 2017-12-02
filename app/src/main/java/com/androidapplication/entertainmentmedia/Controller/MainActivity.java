@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -247,6 +248,7 @@ public class MainActivity extends AppCompatActivity {
 
         protected void onPostExecute(Void doInBackground)
         {
+            Toast.makeText(getBaseContext(), "You have logged out.", Toast.LENGTH_SHORT).show();
             invalidateOptionsMenu();
         }
     }
