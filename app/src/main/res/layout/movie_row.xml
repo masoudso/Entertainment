@@ -47,13 +47,13 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/movieTypeTextView"
+                android:id="@+id/movieGenreTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/movieYearTextView"
                 android:layout_below="@+id/movieYearTextView"
                 android:padding="5dp"
-                android:text="@string/movie_type_name"
+                android:text="@string/movie_genre"
                 android:textAlignment="viewStart"
                 android:textSize="14sp"
                 android:textStyle="bold" />

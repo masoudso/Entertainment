@@ -8,43 +8,17 @@
     tools:context="com.androidapplication.entertainmentmedia.Controller.MovieDetailsActivity">
 
     <TextView
-        android:id="@+id/movieWritersDetailsTextView"
+        android:id="@+id/movieCrewDetailsTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="16dp"
-        android:text="@string/movie_writers_name"
+        android:text="@string/move_crew_names"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/movieActorsDetailsTextView" />
-
-    <TextView
-        android:id="@+id/movieActorsDetailsTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/movie_actors_name"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/moviedirectorDetailsTextView" />
-
-    <TextView
-        android:id="@+id/movieBoxOfficeDetailsTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="12dp"
-        android:text="@string/movie_box_office_name"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/movieWritersDetailsTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/movieCast" />
 
     <TextView
         android:id="@+id/moviePlotDetailsTextView"
@@ -89,35 +63,19 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="14dp"
+                android:layout_marginTop="18dp"
                 android:layout_toEndOf="@+id/moviePosterDetailsImageVeiw"
                 android:text="@string/movie_year_name"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/movieTypeDetailsTextView"
+                android:id="@+id/movieCatagoryDetailsTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/movieYearDetailsTextView"
                 android:layout_below="@+id/movieYearDetailsTextView"
+                android:layout_marginTop="15dp"
                 android:text="@string/movie_type_name"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/movieRatingDetailsTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/movieTypeDetailsTextView"
-                android:layout_below="@+id/movieTypeDetailsTextView"
-                android:text="@string/movie_rating_name"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/movieRunTimeDetailsTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/movieRatingDetailsTextView"
-                android:layout_below="@+id/movieRatingDetailsTextView"
-                android:text="@string/movie_runtime_name"
                 android:textStyle="bold" />
 
         </RelativeLayout>
@@ -138,21 +96,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/moviedirectorDetailsTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/movieRunTimeDetailsTextView"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/movie_director_name"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/movieCast" />
-
     <Button
         android:id="@+id/button_rate"
         android:layout_width="wrap_content"
@@ -170,7 +113,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="16dp"
-        android:text="@string/movie_cast"
+        android:text="@string/movie_crew"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

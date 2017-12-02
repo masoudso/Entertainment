@@ -32,5 +32,8 @@
     <string name="register_has_account">I already have an account. Login.</string>
     <string name="login_title">User Login</string>
     <string name="register_email">Enter Email Address</string>
+    <string name="movie_crew">Crew</string>
+    <string name="move_crew_names">crew names</string>
+    <string name="movie_genre">Genre</string>
 
 </resources>

@@ -41,8 +41,8 @@ public class MovieDetailsActivity extends AppCompatActivity {
     private ImageView moviePoster;
     private TextView movieYear;
     private TextView movieDirector;
-    private TextView movieActors;
-    private TextView movieType;
+    private TextView movieCrew;
+    private TextView movieCatagory;
     private TextView movieRating;
     private TextView movieWriters;
     private TextView moviePlot;
@@ -85,13 +85,9 @@ public class MovieDetailsActivity extends AppCompatActivity {
         movieTitle = (TextView) findViewById(R.id.movieTitleDetailsTextView);
         moviePoster = (ImageView) findViewById(R.id.moviePosterDetailsImageVeiw);
         movieYear = (TextView) findViewById(R.id.movieYearDetailsTextView);
-        movieDirector = (TextView) findViewById(R.id.moviedirectorDetailsTextView);
-        movieType = (TextView) findViewById(R.id.movieTypeDetailsTextView);
-        movieRating = (TextView) findViewById(R.id.movieRatingDetailsTextView);
-        movieWriters = (TextView) findViewById(R.id.movieWritersDetailsTextView);
+        movieCrew = (TextView) findViewById(R.id.movieCrewDetailsTextView);
+        movieCatagory = (TextView) findViewById(R.id.movieCatagoryDetailsTextView);
         moviePlot = (TextView) findViewById(R.id.moviePlotDetailsTextView);
-        movieBoxOffice = (TextView) findViewById(R.id.movieBoxOfficeDetailsTextView);
-        movieRuntime = (TextView) findViewById(R.id.movieRunTimeDetailsTextView);
 
     }
 
@@ -156,55 +152,21 @@ public class MovieDetailsActivity extends AppCompatActivity {
     }
 
     private void getMovieDetails(String movieId) {
-        /**********************MAY HAVE TO EDIT THE CODE ***********************/
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
-                Constants.URL + movieId + Constants.URL_RIGHT, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try{
-                    if(response.has("Ratings")){
-                        JSONArray ratingJSONArray = response.getJSONArray("Ratings");
 
-                        String source = null;
-                        String value = null;
-                        if(ratingJSONArray.length() > 0){
-                            JSONObject ratingJSONObject = ratingJSONArray.getJSONObject(ratingJSONArray.length() -1);
-                            source = ratingJSONObject.getString("Source");
-                            value = ratingJSONObject.getString("Value");
+        movieTitle.setText(movie.getTitle());
+        movieYear.setText(movie.getYear());
+        moviePlot.setText(movie.getPlot());
+        //movieRuntime.setText("Runtime: " + response.getString("Runtime"));
+        movieCrew.setText(movie.getActors());
+        movieCatagory.setText(movie.getGenre());
+        //movieBoxOffice.setText("BoxOffice: " + response.getString("BoxOffice"));
+        //movieDirector.setText("Director: " + response.getString("Director"));
+        //movieWriters.setText("Writer: " + response.getString("Writer"));
 
-                            movieRating.setText(source + " : " + value);
-                        }
-                        else{
-                            movieRating.setText("Ratings: N/A");
-                        }
+        Picasso.with(getApplicationContext())
+                .load(movie.getPoster())
+                .into(moviePoster);
 
-                        movieTitle.setText(response.getString("Title"));
-                        movieYear.setText("Released: " + response.getString("Released"));
-                        movieDirector.setText("Director: " + response.getString("Director"));
-                        movieWriters.setText("Writer: " + response.getString("Writer"));
-                        moviePlot.setText("Plot: " + response.getString("Plot"));
-                        movieRuntime.setText("Runtime: " + response.getString("Runtime"));
-                       // movieActors.setText("Actors: " + response.getString("Actors"));
-                        movieBoxOffice.setText("BoxOffice: " + response.getString("BoxOffice"));
-
-                        Picasso.with(getApplicationContext())
-                                .load(response.getString("Poster"))
-                                .into(moviePoster);
-                    }
-                }
-                catch (JSONException e){
-                    e.printStackTrace();
-                }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.d("Error: ", error.getMessage());
-            }
-        });
-
-        queue.add(jsonObjectRequest);
     }
 
     private void getAPI()

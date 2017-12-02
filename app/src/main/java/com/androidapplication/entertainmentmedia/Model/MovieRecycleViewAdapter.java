@@ -49,7 +49,7 @@ public class MovieRecycleViewAdapter extends RecyclerView.Adapter<MovieRecycleVi
         Movie movie = movieList.get(position);
 
         holder.movieTitle.setText(movie.getTitle());
-        holder.movieType.setText(movie.getMovieType());
+        holder.movieGenre.setText(movie.getGenre());
 
 
         Picasso.with(context)
@@ -71,7 +71,7 @@ public class MovieRecycleViewAdapter extends RecyclerView.Adapter<MovieRecycleVi
        private TextView movieTitle;
        private ImageView moviePoster;
        private TextView movieYear;
-       private TextView movieType;
+       private TextView movieGenre;
 
         public ViewHolder(View itemView, final Context ctx) {
             super(itemView);
@@ -80,7 +80,7 @@ public class MovieRecycleViewAdapter extends RecyclerView.Adapter<MovieRecycleVi
             movieTitle = (TextView) itemView.findViewById(R.id.movieTitleTextView);
             moviePoster = (ImageView) itemView.findViewById(R.id.moviePosterImageView);
             movieYear = (TextView) itemView.findViewById(R.id.movieYearTextView);
-            movieType = (TextView) itemView.findViewById(R.id.movieTypeTextView);
+            movieGenre = (TextView) itemView.findViewById(R.id.movieGenreTextView);
 
             itemView.setOnClickListener(new OnClickListener() {
                 @Override

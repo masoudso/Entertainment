@@ -180,11 +180,41 @@ public class MainActivity extends AppCompatActivity {
             for (int i = 0; i < movies.length(); i++) {
                 Movie movie = new Movie();
                 JSONObject movieObject = movies.getJSONObject(i);
+                JSONArray genres = movieObject.getJSONArray("genres");
+                JSONArray crews = movieObject.getJSONArray("crews");
 
                 movie.setTitle(movieObject.getString("title"));
-                movie.setYear(movieObject.getString("air_date_time"));
+                movie.setYear(movieObject.getString("air_date_time").substring(0, 4));
                 movie.setPlot(movieObject.getString("description"));
                 movie.setPoster(movieObject.getString("pic_url"));
+
+                StringBuilder genreStrBuilder = new StringBuilder();
+
+                for (int j = 0; j < genres.length(); j++)
+                {
+                    genreStrBuilder.append(genres.getJSONObject(j).getString("name") + " ");
+
+                    if (j != genres.length() - 1){
+                        genreStrBuilder.append(", ");
+                    }
+                }
+
+                StringBuilder crewStrBuilder = new StringBuilder();
+
+                for (int j = 0; j < crews.length(); j++)
+                {
+                    crewStrBuilder.append(crews.getJSONObject(j).getString("fname") + " " +
+                            crews.getJSONObject(j).getString("lname"));
+
+                    if (j != crews.length() - 1){
+                        crewStrBuilder.append(", ");
+                    }
+                }
+
+
+
+                movie.setActors(crewStrBuilder.toString());
+                movie.setGenre(genreStrBuilder.toString());
 
                 movieList.add(movie);
             }
@@ -224,7 +254,7 @@ public class MainActivity extends AppCompatActivity {
     private class searchTask extends AsyncTask<String, Void, Void> {
 
         private String query;
-        private JSONObject movieObject;
+        private JSONObject searchObject;
 
         private searchTask(String query) {
             this.query = query;
@@ -232,13 +262,13 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(String... strings) {
-            movieObject = api.search(query);
+            searchObject = api.search(query);
             return null;
         }
 
         protected void onPostExecute(Void doInBackground)
         {
-            parseMovie(movieObject);
+            parseMovie(searchObject);
         }
     }
 }

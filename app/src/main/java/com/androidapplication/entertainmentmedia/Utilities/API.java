@@ -17,6 +17,7 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -85,12 +86,15 @@ public class API implements Serializable{
         try {
             url = new URL(this.URL + append);
 
+            Log.d("URL: ", String.valueOf(url));
+
             conn = (HttpURLConnection) url.openConnection();
 
             conn.setDoInput(true);
-            conn.setDoOutput(true);
+            conn.setDoOutput(requestMethod.equals("POST") || requestMethod.equals("PUT"));
 
-            conn.setRequestMethod(requestMethod);
+            if (!requestMethod.equals("GET"))
+                conn.setRequestMethod(requestMethod);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
