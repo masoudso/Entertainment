@@ -136,6 +136,8 @@ public class API implements Serializable{
             }
 
             this.loggedIn = true;
+            Log.d("Username:", this.username);
+            Log.d("token", this.authtoken);
             return true;
         }
         return false;

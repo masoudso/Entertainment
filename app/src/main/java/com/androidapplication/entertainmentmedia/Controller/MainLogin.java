@@ -69,15 +69,7 @@ public class MainLogin extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-            if (loginUser(viewUsername.getText().toString(), viewPassword.getText().toString()))
-            {
-                //Login successful, return the API to mainActivity
-                Intent retIntent = new Intent();
-                retIntent.putExtra("API", api);
-                setResult(RESULT_OK, retIntent);
-                finish();
-            }
+            loginUser(viewUsername.getText().toString(), viewPassword.getText().toString());
             }
         });
 
@@ -96,17 +88,14 @@ public class MainLogin extends AppCompatActivity {
         });
     }
 
-    private boolean loginUser(String username, String password)
+    private void loginUser(String username, String password)
     {
-        if (username.isEmpty() || password.isEmpty())
-            return false;
-
-        //loginButton.setEnabled(false);
+        if (username.isEmpty() || password.isEmpty()) {
+            return;
+        }
 
         authTask task = new authTask(username, password);
         task.execute();
-
-        return true;
     }
 
     private class authTask extends AsyncTask<String, Void, Void> {
@@ -126,9 +115,15 @@ public class MainLogin extends AppCompatActivity {
             return null;
         }
 
-        protected void onPostExecute()
+        protected void onPostExecute(Void doInBackground)
         {
-
+            if (api.getLoginStatus()) {
+                //Login successful, return the API to mainActivity
+                Intent retIntent = new Intent();
+                retIntent.putExtra("API", api);
+                setResult(RESULT_OK, retIntent);
+                finish();
+            }
         }
     }
 
