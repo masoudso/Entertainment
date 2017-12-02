@@ -69,12 +69,15 @@ public class MainLogin extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginUser(viewUsername.getText().toString(), viewPassword.getText().toString());
 
-                Intent intent = new Intent();
-                intent.putExtra("API", api);
-                setResult(RESULT_OK, intent);
+            if (loginUser(viewUsername.getText().toString(), viewPassword.getText().toString()))
+            {
+                //Login successful, return the API to mainActivity
+                Intent retIntent = new Intent();
+                retIntent.putExtra("API", api);
+                setResult(RESULT_OK, retIntent);
                 finish();
+            }
             }
         });
 
@@ -82,15 +85,21 @@ public class MainLogin extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainLogin.this, MainRegister.class);
-                MainLogin.this.startActivity(intent);
+                MainLogin.this.startActivityForResult(intent, 1);
+
+                //Registration successful, return the API to mainActivity
+                Intent retIntent = new Intent();
+                retIntent.putExtra("API", api);
+                setResult(RESULT_OK, retIntent);
+                finish();
             }
         });
     }
 
-    private void loginUser(String username, String password)
+    private boolean loginUser(String username, String password)
     {
         if (username.isEmpty() || password.isEmpty())
-            return;
+            return false;
 
         //loginButton.setEnabled(false);
 
@@ -99,8 +108,11 @@ public class MainLogin extends AppCompatActivity {
         postData.put("username", username);
         postData.put("password", password);
 
-        authTask task = new authTask(postData);
-        task.execute();
+        return api.login(postData);
+
+        //Obsolete?
+        //authTask task = new authTask(postData);
+        //task.execute();
 
     }
 
@@ -117,55 +129,6 @@ public class MainLogin extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(String... strings) {
-            try
-            {
-                URL url = new URL("https://cop4331.herokuapp.com/api/sessions");
-                HttpURLConnection connection = (HttpURLConnection)url.openConnection();
-
-                connection.setDoOutput(true);
-                connection.setDoInput(true);
-                connection.setRequestMethod("POST");
-
-                //Header type
-                connection.setRequestProperty("Content-Type", "application/json");
-
-                //Put the JSON object into message body
-                if (this.postData != null) {
-                    OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
-                    writer.write(postData.toString());
-                    writer.flush();
-                }
-
-                //Don't know if this does anything
-                //connection.connect();
-
-                //Get response
-                int responseCode = connection.getResponseCode();
-
-                if (responseCode == HttpURLConnection.HTTP_OK) {
-
-                    InputStream stream = new BufferedInputStream(connection.getInputStream());
-
-                    BufferedReader streamReader = new BufferedReader(new InputStreamReader(stream, "UTF-8"));
-                    StringBuilder responseStrBuilder = new StringBuilder();
-
-                    String inputStr;
-
-                    //Convert InputStream from response to JSONObject
-                    try {
-                        while ((inputStr = streamReader.readLine()) != null)
-                            responseStrBuilder.append(inputStr);
-                        responseData = new JSONObject(responseStrBuilder.toString());
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    Log.d("Reponse", String.valueOf(responseCode));
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
             return null;
         }
 
@@ -177,7 +140,17 @@ public class MainLogin extends AppCompatActivity {
 
     private void getAPI()
     {
-        this.api = (API) getIntent().getSerializableExtra("API");
+        api = (API) getIntent().getSerializableExtra("API");
+    }
+
+    //Recieve API from finished register activity
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK) {
+                api = (API) data.getSerializableExtra("API");
+            }
+        }
     }
 
 }

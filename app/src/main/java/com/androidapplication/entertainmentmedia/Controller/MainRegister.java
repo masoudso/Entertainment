@@ -11,13 +11,17 @@ import android.widget.Toast;
 import com.androidapplication.entertainmentmedia.R;
 import com.androidapplication.entertainmentmedia.Utilities.API;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class MainRegister extends AppCompatActivity {
 
     private enum regResult {
         SUCCESS,
         INVALID_USERNAME,
         INVALID_PASSWORD,
-        INVALID_EMAIL;
+        INVALID_EMAIL,
+        UNKNOWN_ERROR;
     }
 
     private EditText viewUsername;
@@ -58,6 +62,10 @@ public class MainRegister extends AppCompatActivity {
                 {
                     case SUCCESS:
                         Toast.makeText(getBaseContext(), "Your account has been registered.", Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent();
+                        intent.putExtra("API", api);
+                        setResult(RESULT_OK, intent);
                         finish();
                         break;
                     case INVALID_USERNAME:
@@ -85,7 +93,25 @@ public class MainRegister extends AppCompatActivity {
     //Returns SUCCESS if account is created, returns INVALID_* if account fails to create
     private regResult createUser(String username, String email, String password)
     {
-        return regResult.SUCCESS;
+        if (username.isEmpty())
+            return regResult.INVALID_USERNAME;
+
+        if (email.isEmpty())
+            return regResult.INVALID_USERNAME;
+
+        if (password.isEmpty())
+            return regResult.INVALID_PASSWORD;
+
+        //Put user credentials into object for API call
+        Map<String, String> postData = new HashMap<>();
+        postData.put("username", username);
+        postData.put("password", password);
+        postData.put("email", email);
+
+        if (api.register(postData))
+            return regResult.SUCCESS;
+
+        return regResult.UNKNOWN_ERROR;
     }
 
     private void getAPI()
