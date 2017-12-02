@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
@@ -18,7 +19,7 @@ import java.util.Map;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class API {
+public class API implements Serializable{
 
     private final String URL = "https://cop4331.herokuapp.com/api/";
 
@@ -41,7 +42,7 @@ public class API {
         this.respData = null;
     }
 
-    private boolean getResponse(int ourResponse, int expResponse) {
+    private boolean getResponse(int ourResponse, int expResponse, HttpURLConnection conn) {
         if (ourResponse == expResponse) {
             if (this.action == "logout") {
                 this.respData = null;
@@ -59,7 +60,7 @@ public class API {
                 while ((input = streamReader.readLine()) != null) {
                     responseStrBuilder.append(input);
                 }
-                this.respData = JSONObject(responseStrBuilder.toString();
+                this.respData = new JSONObject(responseStrBuilder.toString());
                 return true;
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -71,6 +72,8 @@ public class API {
             Log.d("Response", String.valueOf(ourResponse));
             return false;
         }
+
+        return true;
     }
 
     private HttpURLConnection setupConnection(String append, String requestMethod) {
@@ -101,14 +104,10 @@ public class API {
     }
 
 
-    public boolean login(HashMap post) {
+    public boolean login(Map<String, String> post) {
         this.action = "login";
         clearPriors();
-        try {
-            this.sendData = new JSONObject(post);
-        } catch (JSONException e) {
-            Log.e("SendData", "Invalid HashMap to JSON conversion: " + post.toString())
-        }
+        this.sendData = new JSONObject(post);
 
         HttpURLConnection conn = this.setupConnection("sessions", "POST");
 
@@ -127,29 +126,31 @@ public class API {
             e.printStackTrace();
         }
 
-        if (getResponse(this.responseCode, HttpURLConnection.HTTP_CREATED) && this.respData != null) {
-            this.username = this.respData.data.user.username;
-            this.authtoken = this.respData.data.user.authtoken;
+        if (getResponse(this.responseCode, HttpURLConnection.HTTP_CREATED, conn) && this.respData != null) {
+
+            try {
+                this.username = this.respData.getJSONObject("data").getJSONObject("user").getString("username");
+                this.authtoken = this.respData.getJSONObject("data").getJSONObject("user").getString("authentication_token");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
             this.loggedIn = true;
             return true;
         }
         return false;
     }
 
-    public boolean register(HashMap post) {
+    public boolean register(Map<String, String> post) {
         this.action = "register";
         clearPriors();
-        try {
-            this.sendData = new JSONObject(post);
-        } catch (JSONException e) {
-            Log.e("SendData", "Invalid HashMap to JSON conversion: " + post.toString())
-        }
+        this.sendData = new JSONObject(post);
+
+        HttpURLConnection conn = this.setupConnection("sessions", "POST");
+
+        conn.setRequestProperty("Content-Type", "application/json");
 
         try {
-            HttpURLConnection conn = this.setupConnection("sessions", "POST");
-
-            conn.setRequestProperty("Content-Type", "application/json");
-
             if (this.sendData != null) {
                 OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
 
@@ -163,9 +164,15 @@ public class API {
             e.printStackTrace();
         }
 
-        if (getResponse(this.responseCode, HttpURLConnection.HTTP_CREATED) && this.respData != null) {
-            this.username = this.respData.data.user.username;
-            this.authtoken = this.respData.data.user.authtoken;
+        if (getResponse(this.responseCode, HttpURLConnection.HTTP_CREATED, conn) && this.respData != null) {
+
+            try {
+                this.username = this.respData.getJSONObject("data").getJSONObject("user").getString("username");
+                this.authtoken = this.respData.getJSONObject("data").getJSONObject("user").getString("authentication_token");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
             this.loggedIn = true;
             return true;
         }
@@ -184,7 +191,7 @@ public class API {
             e.printStackTrace();
         }
 
-        if (getResponse(this.responseCode, HttpURLConnection.HTTP_OK) && this.respData == null) {
+        if (getResponse(this.responseCode, HttpURLConnection.HTTP_OK, conn) && this.respData == null) {
             this.username = "";
             this.authtoken = "";
             this.loggedIn = false;
@@ -206,10 +213,15 @@ public class API {
             e.printStackTrace();
         }
 
-        if (getResponse(this.responseCode, HttpURLConnection.HTTP_OK) && this.respData != null) {
+        if (getResponse(this.responseCode, HttpURLConnection.HTTP_OK, conn) && this.respData != null) {
             return this.respData;
         }
         return null;
+    }
+
+    public boolean getLoginStatus()
+    {
+        return loggedIn;
     }
 
 }
