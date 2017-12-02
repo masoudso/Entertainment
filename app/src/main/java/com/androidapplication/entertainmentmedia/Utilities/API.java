@@ -2,6 +2,8 @@ package com.androidapplication.entertainmentmedia.Utilities;
 
 import android.util.Log;
 
+import com.android.volley.http.HttpResponse;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -96,8 +98,8 @@ public class API implements Serializable{
         }
 
         if (this.loggedIn) {
-            conn.setRequestProperty("X-Auth-Username", username);
-            conn.setRequestProperty("X-Auth-Token", authtoken);
+            conn.setRequestProperty("X-User-Username", username);
+            conn.setRequestProperty("X-User-Token", authtoken);
         }
 
         return conn;
@@ -136,8 +138,6 @@ public class API implements Serializable{
             }
 
             this.loggedIn = true;
-            Log.d("Username:", this.username);
-            Log.d("token", this.authtoken);
             return true;
         }
         return false;
@@ -208,6 +208,8 @@ public class API implements Serializable{
 
         String append = "search?q=" + query.replace(" ", "+");
         HttpURLConnection conn = this.setupConnection(append, "GET");
+
+        Log.d("Append: ", append);
 
         try {
             this.responseCode = conn.getResponseCode();
