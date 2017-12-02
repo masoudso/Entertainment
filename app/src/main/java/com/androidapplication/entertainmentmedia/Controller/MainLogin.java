@@ -77,13 +77,8 @@ public class MainLogin extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainLogin.this, MainRegister.class);
+                intent.putExtra("API", api);
                 MainLogin.this.startActivityForResult(intent, 1);
-
-                //Registration successful, return the API to mainActivity
-                Intent retIntent = new Intent();
-                retIntent.putExtra("API", api);
-                setResult(RESULT_OK, retIntent);
-                finish();
             }
         });
     }
@@ -142,6 +137,9 @@ public class MainLogin extends AppCompatActivity {
         if (requestCode == 1) {
             if(resultCode == RESULT_OK) {
                 api = (API) data.getSerializableExtra("API");
+                Intent intent = new Intent(MainLogin.this, MainRegister.class);
+                intent.putExtra("API", api);
+                MainLogin.this.startActivityForResult(intent, 1);
             }
         }
     }

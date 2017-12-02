@@ -1,8 +1,10 @@
 package com.androidapplication.entertainmentmedia.Controller;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -56,28 +58,7 @@ public class MainRegister extends AppCompatActivity {
         buttonRegisterAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                regResult res = createUser(viewUsername.getText().toString(), viewEmail.getText().toString(), viewPassword.getText().toString());
-
-                switch(res)
-                {
-                    case SUCCESS:
-                        Toast.makeText(getBaseContext(), "Your account has been registered.", Toast.LENGTH_SHORT).show();
-
-                        Intent intent = new Intent();
-                        intent.putExtra("API", api);
-                        setResult(RESULT_OK, intent);
-                        finish();
-                        break;
-                    case INVALID_USERNAME:
-                        Toast.makeText(getBaseContext(), "Invalid username.", Toast.LENGTH_SHORT).show();
-                        break;
-                    case INVALID_EMAIL:
-                        Toast.makeText(getBaseContext(), "Invalid email address.", Toast.LENGTH_SHORT).show();
-                        break;
-                    case INVALID_PASSWORD:
-                        Toast.makeText(getBaseContext(), "Invalid password.", Toast.LENGTH_SHORT).show();
-                        break;
-                }
+                createUser(viewUsername.getText().toString(), viewEmail.getText().toString(), viewPassword.getText().toString());
             }
         });
     }
@@ -91,27 +72,48 @@ public class MainRegister extends AppCompatActivity {
 
     //Validates the user input and attempts to create a new user
     //Returns SUCCESS if account is created, returns INVALID_* if account fails to create
-    private regResult createUser(String username, String email, String password)
+    private void createUser(String username, String email, String password)
     {
         if (username.isEmpty())
-            return regResult.INVALID_USERNAME;
+            return;
 
         if (email.isEmpty())
-            return regResult.INVALID_USERNAME;
+            return;
 
         if (password.isEmpty())
-            return regResult.INVALID_PASSWORD;
+            return;
 
-        //Put user credentials into object for API call
-        Map<String, String> postData = new HashMap<>();
-        postData.put("username", username);
-        postData.put("password", password);
-        postData.put("email", email);
+        regTask task = new regTask(username, password);
+        task.execute();
+    }
 
-        if (api.register(postData))
-            return regResult.SUCCESS;
+    private class regTask extends AsyncTask<String, Void, Void> {
 
-        return regResult.UNKNOWN_ERROR;
+        Map<String, String> postData;
+
+        public regTask(String username, String password) {
+            postData = new HashMap<>();
+            postData.put("username", username);
+            postData.put("password", password);
+        }
+
+        @Override
+        protected Void doInBackground(String... strings) {
+            Log.d("user", postData.get("username"));
+            api.register(postData);
+            return null;
+        }
+
+        protected void onPostExecute(Void doInBackground)
+        {
+            if (api.getLoginStatus()) {
+                Toast.makeText(getBaseContext(), "Your account has been registered.", Toast.LENGTH_SHORT).show();
+                Intent retIntent = new Intent();
+                retIntent.putExtra("API", api);
+                setResult(RESULT_OK, retIntent);
+                finish();
+            }
+        }
     }
 
     private void getAPI()

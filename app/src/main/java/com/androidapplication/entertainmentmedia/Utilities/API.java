@@ -152,7 +152,7 @@ public class API implements Serializable{
         clearPriors();
         this.sendData = new JSONObject(post);
 
-        HttpURLConnection conn = this.setupConnection("sessions", "POST");
+        HttpURLConnection conn = this.setupConnection("register", "POST");
 
         conn.setRequestProperty("Content-Type", "application/json");
 
