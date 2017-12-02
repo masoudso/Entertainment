@@ -103,32 +103,26 @@ public class MainLogin extends AppCompatActivity {
 
         //loginButton.setEnabled(false);
 
-        //Put user credentials into object for API call
-        Map<String, String> postData = new HashMap<>();
-        postData.put("username", username);
-        postData.put("password", password);
+        authTask task = new authTask(username, password);
+        task.execute();
 
-        return api.login(postData);
-
-        //Obsolete?
-        //authTask task = new authTask(postData);
-        //task.execute();
-
+        return true;
     }
 
     private class authTask extends AsyncTask<String, Void, Void> {
 
-        JSONObject postData;
         JSONObject responseData;
+        Map<String, String> postData;
 
-        public authTask(Map<String, String> postData) {
-            if (postData != null) {
-                this.postData = new JSONObject(postData);
-            }
+        public authTask(String username, String password) {
+            postData = new HashMap<>();
+            postData.put("username", username);
+            postData.put("password", password);
         }
 
         @Override
         protected Void doInBackground(String... strings) {
+            api.login(postData);
             return null;
         }
 
