@@ -23,8 +23,8 @@ public class API implements Serializable{
 
     private final String URL = "https://cop4331.herokuapp.com/api/";
 
-    private JSONObject sendData;
-    private JSONObject respData;
+    private transient JSONObject sendData;
+    private transient JSONObject respData;
 
     private String username;
     private String authtoken;
