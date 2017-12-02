@@ -143,7 +143,7 @@ public class MainLogin extends AppCompatActivity {
         api = (API) getIntent().getSerializableExtra("API");
     }
 
-    //Recieve API from finished register activity
+    //Receive API from finished register activity
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {

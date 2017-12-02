@@ -86,6 +86,14 @@ public class MainActivity extends AppCompatActivity {
         //inflate the menu: this add items to the action bar if it present
         //getMenuInflater().inflate(R.menu);
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        final MenuItem loginMenuItem = menu.findItem(R.id.button_login);
+
+        if (api.getLoginStatus())
+            loginMenuItem.setTitle("Login");
+        else
+            loginMenuItem.setTitle("Logout");
+
         return true;
     }
 
@@ -101,9 +109,15 @@ public class MainActivity extends AppCompatActivity {
 
         if (id == R.id.button_login)
         {
-            Intent intent = new Intent(MainActivity.this, MainLogin.class);
-            intent.putExtra("API", api);
-            MainActivity.this.startActivityForResult(intent, 1);
+            if (api.getLoginStatus()) {
+                Intent intent = new Intent(MainActivity.this, MainLogin.class);
+                intent.putExtra("API", api);
+                MainActivity.this.startActivityForResult(intent, 1);
+            }
+            else{
+                api.logout();
+            }
+
         }
 
         return super.onOptionsItemSelected(item);
@@ -181,12 +195,13 @@ public class MainActivity extends AppCompatActivity {
         return movieList;
     }
 
-    //Recieve API from finished login activity
+    //Receive API from finished login activity
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
             if(resultCode == RESULT_OK) {
                 api = (API) data.getSerializableExtra("API");
+                invalidateOptionsMenu(); //Rename the login/logout button
             }
         }
     }
