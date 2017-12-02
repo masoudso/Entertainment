@@ -92,9 +92,9 @@ public class MainActivity extends AppCompatActivity {
         final MenuItem loginMenuItem = menu.findItem(R.id.button_login);
 
         if (api.getLoginStatus())
-            loginMenuItem.setTitle("Login");
-        else
             loginMenuItem.setTitle("Logout");
+        else
+            loginMenuItem.setTitle("Login");
 
         return true;
     }
@@ -112,12 +112,12 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.button_login)
         {
             if (api.getLoginStatus()) {
+                api.logout();
+            }
+            else{
                 Intent intent = new Intent(MainActivity.this, MainLogin.class);
                 intent.putExtra("API", api);
                 MainActivity.this.startActivityForResult(intent, 1);
-            }
-            else{
-                api.logout();
             }
 
         }
